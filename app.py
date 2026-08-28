@@ -1,4 +1,8 @@
 import streamlit as st
+import sys
+import os
+
+sys.path.insert(0, os.path.dirname(__file__))
 
 st.set_page_config(
     page_title="Exit Clock — Smart Profit Booking Model",
@@ -7,7 +11,12 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-from pages import asset_input, valuation, exit_ladder, sentiment, verdict
+import importlib
+asset_input  = importlib.import_module("pages.asset_input")
+valuation    = importlib.import_module("pages.valuation")
+exit_ladder  = importlib.import_module("pages.exit_ladder")
+sentiment    = importlib.import_module("pages.sentiment")
+verdict      = importlib.import_module("pages.verdict")
 
 st.sidebar.title("⏰ Exit Clock")
 st.sidebar.caption("Smart profit booking model for any asset")
@@ -16,7 +25,6 @@ st.sidebar.markdown("---")
 page = st.sidebar.radio(
     "Navigate",
     ["1. Asset Inputs", "2. Valuation Engine", "3. Exit Ladder", "4. Sentiment Check", "5. Final Verdict"],
-    index=0
 )
 
 st.sidebar.markdown("---")
